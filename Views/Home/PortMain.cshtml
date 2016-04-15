@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "PortMain";
+}
+<html>
+<head>
+    <title >Portfolio Menu</title>
+</head>
+<body>
+    
+   <ul>
+       <li>@Html.ActionLink("PortFolio", "OverView", "Portfolio")</li>
+       <li>@Html.ActionLink("Retirement", "Retirement", "Portfolio")</li>
+       <li>@Html.ActionLink("Convert Data", "Convert", "Portfolio")</li>
+       <li>@Html.ActionLink("Update Transactions", "Update", "Portfolio")</li>
+       <li>@Html.ActionLink("Transactions", "Index", "TransactionDB")</li>
+
+   </ul>
+
+
+</body>
+</html>

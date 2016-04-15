@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE cXML SYSTEM "http://xml.cXML.org/schemas/cXML/1.2.024/cXML.dtd">
+<FolioOptions>
+  <StartDate>9/17/2013</StartDate>
+  <SPYDate>12/31/2015</SPYDate>
+  <Watches>KMI,LKQ,BWA,WWAV,LGF,MINI,VZ,H,URBN,INTC,NCR,BAC,HD,PII,ILMN,NDAQ,CMG,PCLN,NFLX,HEI,MYL,DPLO,ADBE,TXRH,BRK-B,WSM,HAIN,UA,CRI</Watches>
+  <MHeight>630</MHeight>
+  <MWidth>650</MWidth>
+  <Bank1>5012.42</Bank1>
+  <Bank2>19019.16</Bank2>
+  <OtherIncome>0</OtherIncome>
+  <OtherIncome2>100000</OtherIncome2>
+  <RetireDate>4/10/2025</RetireDate>
+  <EndDate>4/10/2058</EndDate>
+  <Interest>0.035</Interest>
+  <BankInterest>0.0035</BankInterest>
+  <FutureSavings>500.00</FutureSavings>
+  <FutureRetire>322.71</FutureRetire>
+  <MonthlyEstimate>3502.97</MonthlyEstimate>
+  <CapsAmeritrade>92.27228546309329508899854232</CapsAmeritrade>
+  <CapsWatch>84.07975070254872340578973519</CapsWatch>
+  <CapsVanguard>0</CapsVanguard>
+  <CapsUpdate>1/13/2016</CapsUpdate>
+  <AnalystUpdate>2/29/2016</AnalystUpdate>
+  <Reed>157.00</Reed>
+  <SSA>
+    <Benefits Year="NOW">1683</Benefits>
+    <Benefits Year="62">1782</Benefits>
+    <Benefits Year="63">1914</Benefits>
+    <Benefits Year="65">2226</Benefits>
+    <Benefits Year="67">2584</Benefits>
+  </SSA>
+  <Analyst>
+    <Ticker Symbol="ATVI" PrevScore="95.8134">1.13</Ticker>
+    <Ticker Symbol="ZAYO" PrevScore="98.1365">1.09</Ticker>
+    <Ticker Symbol="CVS" PrevScore="95.1578">1.25</Ticker>
+    <Ticker Symbol="UNH" PrevScore="96.6948">1.42</Ticker>
+    <Ticker Symbol="MET" PrevScore="91.0214">1.46</Ticker>
+    <Ticker Symbol="FB" PrevScore="92.8279">1.21</Ticker>
+    <Ticker Symbol="SBUX" PrevScore="90.8038">1.39</Ticker>
+    <Ticker Symbol="GILD" PrevScore="87.6216">1.71</Ticker>
+    <Ticker Symbol="AAPL" PrevScore="90.9405">1.55</Ticker>
+    <Ticker Symbol="NKE" PrevScore="93.2210">1.35</Ticker>
+    <Ticker Symbol="MA" PrevScore="91.3485">1.57</Ticker>
+    <Ticker Symbol="DIS" PrevScore="85.5225">2.22</Ticker>
+    <Ticker Symbol="KMX" PrevScore="86.2500">1.73</Ticker>
+    <Ticker Symbol="UA" PrevScore="83.8702">1.85</Ticker>
+    <Ticker Symbol="EBAY" PrevScore="79.2380">2.5</Ticker>
+    <Ticker Symbol="TXRH" PrevScore="81.6066">2.39</Ticker>
+    <Ticker Symbol="CLB" PrevScore="84.6199">1.63</Ticker>
+    <Ticker Symbol="AZN" PrevScore="66.2591">2.5</Ticker>
+    <Ticker Symbol="CSCO" PrevScore="88.2342">1.81</Ticker>
+    <Ticker Symbol="INOD" PrevScore="69.5860">5</Ticker>
+    <Ticker Symbol="YHOO" PrevScore="84.7103">1.77</Ticker>
+    <Ticker Symbol="ORCL" PrevScore="82.8765">2.15</Ticker>
+    <Ticker Symbol="NRTLQ" PrevScore="0">5</Ticker>
+    <Ticker Symbol="XPO" PrevScore="98.6216">1.13</Ticker>
+    <Ticker Symbol="CRTO" PrevScore="94.6966">1.36</Ticker>
+    <Ticker Symbol="KMI" PrevScore="84.2171">1.93</Ticker>
+    <Ticker Symbol="LKQ" PrevScore="93.9726">1.11</Ticker>
+    <Ticker Symbol="BWA" PrevScore="87.7561">2.13</Ticker>
+    <Ticker Symbol="WWAV" PrevScore="95.6620">1.21</Ticker>
+    <Ticker Symbol="LGF" PrevScore="89.1694">1.2</Ticker>
+    <Ticker Symbol="MINI" PrevScore="91.5169">1.5</Ticker>
+    <Ticker Symbol="VZ" PrevScore="86.9877">2.12</Ticker>
+    <Ticker Symbol="H" PrevScore="78.2662">1.83</Ticker>
+    <Ticker Symbol="FEYE" PrevScore="88.1344">2.18</Ticker>
+    <Ticker Symbol="COST" PrevScore="89.1534">1.69</Ticker>
+    <Ticker Symbol="URBN" PrevScore="78.8971">2.36</Ticker>
+    <Ticker Symbol="INTC" PrevScore="86.9171">1.83</Ticker>
+    <Ticker Symbol="NCR" PrevScore="80.4011">2.17</Ticker>
+    <Ticker Symbol="COF" PrevScore="86.9499">2.06</Ticker>
+    <Ticker Symbol="BAC" PrevScore="85.8194">1.53</Ticker>
+    <Ticker Symbol="HD" PrevScore="83.3684">1.76</Ticker>
+    <Ticker Symbol="PII" PrevScore="86.7928">2</Ticker>
+    <Ticker Symbol="TRIP" PrevScore="79.2629">2.95</Ticker>
+    <Ticker Symbol="CGNX" PrevScore="82.0360">1.86</Ticker>
+    <Ticker Symbol="ILMN" PrevScore="85.8422">2.11</Ticker>
+    <Ticker Symbol="NDAQ" PrevScore="86.0340">2.09</Ticker>
+    <Ticker Symbol="XOOM" PrevScore="0">5</Ticker>
+    <Ticker Symbol="JWN" PrevScore="78.2387">2.42</Ticker>
+    <Ticker Symbol="SWIR" PrevScore="0">2.67</Ticker>
+    <Ticker Symbol="SHW" PrevScore="0">1.92</Ticker>
+    <Ticker Symbol="AMZN" PrevScore="90.2435">1.39</Ticker>
+    <Ticker Symbol="CMG" PrevScore="75.7604">2.44</Ticker>
+    <Ticker Symbol="PCLN" PrevScore="85.1925">1.88</Ticker>
+    <Ticker Symbol="NFLX" PrevScore="80.4994">2.15</Ticker>
+    <Ticker Symbol="WFM" PrevScore="76.6657">2.86</Ticker>
+    <Ticker Symbol="HEI" PrevScore="93.5214">1.6</Ticker>
+    <Ticker Symbol="CTSH" PrevScore="94.5199">1.17</Ticker>
+    <Ticker Symbol="MYL" PrevScore="84.5624">2.09</Ticker>
+    <Ticker Symbol="DPLO" PrevScore="90.0520">1.5</Ticker>
+    <Ticker Symbol="PYPL" PrevScore="87.5252">1.89</Ticker>
+    <Ticker Symbol="ADBE" PrevScore="84.6617">1.77</Ticker>
+    <Ticker Symbol="SAM" PrevScore="68.9460">2.75</Ticker>
+    <Ticker Symbol="LNKD" PrevScore="84.6188">1.97</Ticker>
+    <Ticker Symbol="VTTHX" PrevScore="0">5</Ticker>
+    <Ticker Symbol="VTTVX" PrevScore="0">5</Ticker>
+    <Ticker Symbol="WETF" PrevScore="88.9953">2</Ticker>
+    <Ticker Symbol="DSW" PrevScore="91.1604">2.64</Ticker>
+    <Ticker Symbol="CBOE" PrevScore="59.1120">3.2</Ticker>
+    <Ticker Symbol="BUD" PrevScore="93.9520">1.43</Ticker>
+    <Ticker Symbol="BRK-B" PrevScore="0">5</Ticker>
+    <Ticker Symbol="LUK" PrevScore="0">1</Ticker>
+    <Ticker Symbol="WSM" PrevScore="0">2.26</Ticker>
+    <Ticker Symbol="HAIN" PrevScore="0">1.71</Ticker>
+    <Ticker Symbol="CRI" PrevScore="0">1.4</Ticker>
+  </Analyst>
+  <Track>
+    <Player Display="Cramer">TrackJimCramer</Player>
+    <Player Display="Buffet">TrackBuffett</Player>
+    <Player Display="Me">threeKings410</Player>
+    <Player Display="Barclays">TrackBarclaysCap</Player>
+  </Track>
+  <Earnings>
+    <Company>MET;7/30/2014</Company>
+  </Earnings>
+  <Portfolio>
+    <Name>TDAmeritrade</Name>
+    <ID>1</ID>
+    <Editable>Y</Editable>
+    <MyStocks>Y</MyStocks>
+  </Portfolio>
+  <Portfolio>
+    <Name>Vanguard</Name>
+    <ID>4</ID>
+    <Editable>Y</Editable>
+    <MyStocks>N</MyStocks>
+  </Portfolio>
+  <Portfolio>
+    <Name>Indices</Name>
+    <ID>5</ID>
+    <Editable>Y</Editable>
+    <MyStocks>N</MyStocks>
+  </Portfolio>
+  <Portfolio>
+    <Name>Retire</Name>
+    <ID>3</ID>
+    <Editable>Y</Editable>
+    <MyStocks>N</MyStocks>
+  </Portfolio>
+  <Portfolio>
+    <Name>Sold</Name>
+    <ID>6</ID>
+    <Editable>N</Editable>
+    <MyStocks>N</MyStocks>
+  </Portfolio>
+  <Portfolio>
+    <Name>Watch</Name>
+    <ID>7</ID>
+    <Editable>N</Editable>
+    <MyStocks>N</MyStocks>
+  </Portfolio>
+  <Portfolio>
+    <Name>MF</Name>
+    <ID>8</ID>
+    <Editable>N</Editable>
+    <MyStocks>N</MyStocks>
+  </Portfolio>
+</FolioOptions>

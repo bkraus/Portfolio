@@ -1,0 +1,88 @@
+﻿@model List<Portfolio.Models.Portfolio.PortfolioFunds>
+
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/Content/css")
+<script type="text/javascript">
+    $('.delta').each(function (index) { //iterate over all table rows
+        if ($(this).text() > 0)  //look for the 3rd td in each row. thats where your age is.
+        {
+            $(this).css("color", "green");
+        }
+        else if ($(this).text() < 0) {
+            $(this).css("color", "red");
+        }
+    });
+</script>
+
+@foreach(var item in Model){
+    <h2>@item.Name</h2>
+<table id="Detail">
+    <tr>
+        <th>Symbol
+        </th>
+        <th>Last
+        </th>
+        <th>Change
+        </th>
+        <th>Shares
+        </th>
+        <th>Cost
+        </th>
+        <th>Market
+        </th>
+        <th>Today
+        </th>
+        <th>Pct
+        </th>
+        <th>Paid
+        </th>
+        <th>Gain
+        </th>
+        <th>Pct
+        </th>
+        <th>Own
+        </th>
+        <th>vsSP 
+        </th>
+        <th>yrSP
+        </th>
+        <th></th>
+    </tr>
+@foreach (var Owned in item.portfolioData.Stocks) {
+    <tr>
+        <td>@Owned.Symbol
+        </td>
+        <td class="aRight">@Owned.CurrPrice
+        </td>
+        <td  class="delta">@Owned.PriceChange
+        </td>
+        <td class="aRight">@Owned.shares
+        </td>
+        <td>@Owned.Cost
+        </td>
+        <td>@Owned.MarketValue
+        </td>
+        <td  class="delta">@Owned.DaysChange
+        </td>
+        <td  class="delta">@Owned.DaysChangePct
+        </td>
+        <td>@Owned.PricePaid
+        </td>
+        <td  class="delta">@Owned.Gain
+        </td>
+        <td class="delta">@Owned.GainPct
+        </td>
+        <td>@Owned.PortfolioPct
+        </td>
+        <td  class="delta">@Owned.AgainstSP
+        </td>
+        <td  class="delta">@Owned.SPYPct
+        </td>
+     </tr>
+  }
+</table>
+}
+
+
+
+

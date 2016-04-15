@@ -1,0 +1,107 @@
+﻿@model Portfolio.Models.Portfolio.Retirement
+
+@{
+    ViewBag.Title = "Retirement";
+}
+
+<h2>Retirement</h2>
+
+<table class ="lblRetire">
+    <tr>
+        <td>
+            <div>
+            Months to retirement - @Model.WorkingMonths
+        </div>
+        <div>
+            Months in retirement - @Model.RetiredMonths
+        </div>
+        <div>
+            @string.Format("Monthly Income - {0:C}", @Model.MonthlySalary);
+        </div>
+        <div>
+            @{decimal YearlySalary = @Model.MonthlySalary * 12;}
+            @string.Format("Yearly Income - {0:C}", @YearlySalary);
+        </div>    
+    </td>
+        <td>
+            <div>
+            @string.Format("SigFig - {0:C}", @Model.SigFig);
+            </div>
+            <div>
+            @string.Format("Monthly Salary fv at retirement - {0:C}", @Model.FutureMonthlySalary);
+            </div>
+        <div>
+            @{decimal fvYearlySalary = @Model.FutureMonthlySalary * 12;}
+            @string.Format("Yearly Salary fv at retirement - {0:C}", @fvYearlySalary);
+        </div>    
+        </td>
+    </tr>
+
+</table>
+@using (@Html.BeginForm("RetireUpdate","Portfolio"))
+{   
+    <table class="edtRetire">
+        <tr>
+            <td >
+                <div>
+                    @Html.LabelFor(x => x.Bank1)
+                    @Html.TextBoxFor(x => x.Bank1)
+                </div>
+                <div>
+                    @Html.LabelFor(x => x.Bank2)
+                    @Html.TextBoxFor(x => x.Bank2)
+                </div>
+                <div>
+                    @Html.LabelFor(x => x.OtherIncome)
+                     @Html.TextBoxFor(x => x.OtherIncome)
+                </div>
+                <div>
+                    @Html.LabelFor(x => x.OtherIncome2)
+                    @Html.TextBoxFor(x => x.OtherIncome2)
+                </div>
+                </td>
+                <td>
+                <div>
+                    @Html.LabelFor(x => x.Interest)
+                    @Html.TextBoxFor(x => x.Interest)
+                </div>
+                <div>
+                    @Html.LabelFor(x => x.BankInterest)
+                    @Html.TextBoxFor(x => x.BankInterest)
+                </div>
+                <div>
+                    @Html.LabelFor(x => x.FutureRetire)
+                    @Html.TextBoxFor(x => x.FutureRetire)
+                </div>
+                <div>
+                    @Html.LabelFor(x => x.FutureSavings)
+                    @Html.TextBoxFor(x => x.FutureSavings)
+                </div>
+                <div>
+                    @Html.LabelFor(x => x.SSABenefit)
+                    @Html.TextBoxFor(x => x.SSABenefit)
+                 </div>
+                <div>
+                    @Html.LabelFor(x => x.Reed)
+                    @Html.TextBoxFor(x => x.Reed)
+                 </div>
+          </td>  </tr>
+        </table>
+    <input type="Submit" value ="Update"/>
+}
+<table>
+    <tr>
+        <td>Account</td>
+        <td>Value</td>
+        <td>Retirement Value</td>
+    </tr>
+    @{foreach(var port in @Model.retireData)
+      {
+          <tr>
+            <td>@port.RowName</td>
+              <td> @string.Format("{0:C}",@port.PresentValue)</td>
+              <td> @string.Format("{0:C}",@port.FutureValue)</td>
+          </tr>
+      }
+    }
+</table>

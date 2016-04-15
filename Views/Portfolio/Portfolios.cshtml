@@ -1,0 +1,131 @@
+﻿@model Portfolio.Models.Portfolio.PortfolioSummary
+@{
+    ViewBag.Title = "OverView";
+}
+    @Scripts.Render("~/bundles/jquery")
+        @Styles.Render("~/Content/css")
+
+<script type="text/javascript">
+    $('.delta').each(function (index) { //iterate over all table rows
+        if ($(this).text() > 0)  //look for the 3rd td in each row. thats where your age is.
+        {
+            $(this).css("color", "green");
+        }
+        else if ($(this).text() < 0) {
+            $(this).css("color", "red");
+        }
+    });
+</script>
+
+<h2>OverView</h2>
+<table>
+    <tr>
+        <td>
+    <div>
+     @string.Format("td=  {0:C}  {1}", @Model.MainFundChange, @Model.MainFundPct);
+      </div>
+    <div>
+     @string.Format("sp=  {0:C}  {1}", @Model.IndicesFundChange, @Model.IndicesFundPct);
+      </div>
+    <div>
+     @string.Format("dif=  {0:C}  {1:C}", @Model.TodayDifference, @Model.FundDifference);
+      </div>
+    <div>
+     @string.Format("{0} {1} {2} {3}", @Model.LowestStock, @Model.LowestPct, @Model.StocksAbove, @Model.StocksBelow);
+      </div>
+    <div>
+    @Model.LastUpdate
+        </div>
+            </td>
+        <td>
+    <div>
+     @string.Format("Financial total =  {0:C}", @Model.CashValue);
+      </div>
+    <div>
+     @string.Format("SP total =  {0:C}", @Model.SPCashValue);
+      </div>
+    <div>
+     @string.Format("Diff =  {0:C}", @Model.DiffCashValue);
+      </div>
+
+    <div>
+     @string.Format("YTD =  {0:C}", @Model.YTD);
+      </div>
+        </td>
+</tr>
+
+</table>
+
+<table id ="Overview">
+    <tr>
+        <th>
+           Fund
+        </th>
+        <th>
+           Cash
+        </th>
+        <th>
+            Value
+        </th>
+        <th>
+            Day Change
+        </th>
+        <th>
+           Day%
+        </th>
+        <th>
+            Growth%
+        </th>
+        <th>
+            Year Change
+        </th>
+        <th>
+            Year%
+        </th>
+        <th>
+            vsSP
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Funds) {
+    <tr>
+        <td >
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td class="aRight">
+            @Html.DisplayFor(modelItem => item.Cash)
+        </td>
+        <td class="aRight">
+            @Html.DisplayFor(modelItem => item.Value)
+        </td>
+        <td class="delta">
+            @Html.DisplayFor(modelItem => item.DayChange)
+        </td>
+        <td class="delta">
+            @Html.DisplayFor(modelItem => item.DayChangePct)
+        </td>
+        <td  class="delta">
+            @Html.DisplayFor(modelItem => item.GrowthPct)
+        </td>
+        <td class="delta">
+            @Html.DisplayFor(modelItem => item.YearPct)
+        </td>
+        <td class="delta aRight">
+            @Html.DisplayFor(modelItem => item.YearChange)
+        </td>
+        <td class="delta aRight">
+            @Html.DisplayFor(modelItem => item.vsSP)
+        </td>
+         <td>
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
+        </td>
+    </tr>
+  }
+
+</table>
+     <div id="Investments">
+
+         @Html.Partial("Detail", Model.Funds)
+
+     </div>

@@ -1,0 +1,22 @@
+﻿@model Portfolio.Models.Portfolio.TransactionDB
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>TransactionDB</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TradeID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TradeID)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

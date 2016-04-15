@@ -1,0 +1,47 @@
+﻿@model Portfolio.Models.Weather.Weather
+
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm("CitySearch", "Weather"))
+{
+    <input id="account" type="text" name="city" class="s" />
+    <input id="Search" type="submit" class="b" value="Get City Weather" />
+}
+<h2>Weather for @Model.City</h2>
+<div class="sun">Sunrise - @Model.Sunrise.ToLongTimeString()</div>
+<div class="sun">Sunset - @Model.Sunset.ToLongTimeString()</div>
+
+<div>
+    <table class="Weather">
+    @foreach (var Forecast in @Model.Forecasts)
+    {
+        <tr>
+        <td class="Date">
+            <div class="BigDate">
+                @Forecast.Day.ToString("ddd")
+            </div>
+            <div>
+                @Forecast.Day.ToString("MMM dd")
+            </div>
+          </td>
+            <td class="temp">
+                    <div><span class="lblTemp">High</span> @Convert.ToInt32( @Forecast.Temperature.Max + 0.5m)</div>
+                    <div><span class="lblTemp">Low</span> @Convert.ToInt32( @Forecast.Temperature.Min + 0.5m)</div>
+                </td>
+             <td class="temp">
+                    <div><span class="lblTemp">Day</span> @Convert.ToInt32( @Forecast.Temperature.day + 0.5m)</div>
+                    <div><span class="lblTemp">Night</span> @Convert.ToInt32( @Forecast.Temperature.Night + 0.5m)</div>
+                </td>          
+             <td class="tempOther">
+                <div>Wind Direction - @Forecast.WindDirection</div>
+                <div>Precipitation - @Forecast.precipitation</div>
+                <div>Wind Speed - @Forecast.WindSpeed</div>
+                <div>Pressue - @Forecast.Pressure</div>
+                <div>Humidity - @Forecast.Humidity</div>
+                <div>Clouds - @Forecast.Clouds</div>
+            </td>
+        </tr>
+    }
+    </table>
+</div>
