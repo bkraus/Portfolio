@@ -1,0 +1,42 @@
+﻿@model Portfolio.Models.Music.MediaEdit
+
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Update</h2>
+
+@using (@Html.BeginForm("Save", "Music"))
+{
+   <table>
+       <tr>
+           <td>
+           Artist: @Html.EditorFor(x => x.FirstAlbumArtist)
+               </td>
+           <td>
+           Title: @Html.EditorFor(x => x.Title)
+               </td>
+                      <td>
+           Album: @Html.EditorFor(x => x.Album)
+               </td>
+       </tr>
+        <tr>
+           <td>
+              @Html.HiddenFor(x=>x.ArtistFilter)
+              @Html.HiddenFor(x=>x.FirstComposer)
+              @Html.HiddenFor(x=>x.Disc)
+              @Html.HiddenFor(x=>x.Path)
+           Custom1: @Html.EditorFor(x => x.Custom1)
+               </td>
+           <td>
+           Custom2: @Html.EditorFor(x => x.Custom2)
+               </td>
+                      <td>
+           FirstPerformer: @Html.EditorFor(x => x.FirstPerformer)
+               </td>
+       </tr>
+  </table> 
+    <input id="Search" type="submit" class="b" value="Update" />
+}
+
+

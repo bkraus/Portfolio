@@ -1,4 +1,5 @@
 ﻿using Portfolio.Models.Portfolio;
+using Portfolio.Models.Preference;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -52,7 +53,8 @@ namespace Portfolio.Models
         {
             if (qry.Contains("Watch") || qry.Contains("Sold"))
                 return null;
-            var fileName = string.Format("{0}\\Transactions.xlsx", Path.Combine(HttpContext.Current.Request.PhysicalApplicationPath, "App_Data"));
+            var fileName = string.Format("{0}\\Transactions.xlsx", "C:\\stocks\\stocks\\bin\\Debug");
+//            var fileName = string.Format("{0}\\Transactions.xlsx", Path.Combine(HttpContext.Current.Request.PhysicalApplicationPath, "App_Data"));
             var connectionString = string.Format("Provider=Microsoft.ACE.OLEDB.12.0; data source={0}; Extended Properties='Excel 12.0;HDR=yes'", fileName);
 
             var adapter = new OleDbDataAdapter(qry, connectionString);
@@ -203,6 +205,44 @@ namespace Portfolio.Models
             {
                 o = null;
             }
+        }
+        public static bool UpdateDBTransactions()
+        {
+            var context = new PortfolioContext();
+            DateTime lastUpdate = Preferences.GetDate("LastUpdateDate");
+            List<PortFolios> portfolios = context.PortFolios.ToList();
+            foreach (PortFolios folio in portfolios)
+            {
+                Transactions transactions = new Transactions(folio.Name);
+                transactions.LoadData();
+                if (transactions.Records != null && transactions.Records.Count > 0)
+                {
+                    foreach (TransRec rec in transactions.Records)
+                    {
+                        if (rec.Date > lastUpdate)
+                        {
+                            TransactionDB tdb = new TransactionDB();
+                            tdb.Amount = rec.amount;
+                            tdb.Commission = rec.Commission;
+                            tdb.Date = rec.Date;
+                            tdb.Desc = rec.Desc;
+                            tdb.IsMyAdjustment = rec.IsMyAjustment;
+                            tdb.MyAdjustment = rec.MyAdjustment;
+                            tdb.Price = rec.Price;
+                            tdb.Qty = rec.Qty;
+                            tdb.Symbol = rec.Symbol;
+                            tdb.TradeID = rec.TradeID.ToString();
+                            tdb.TranId = rec.TranId.ToString();
+                            tdb.Type = rec.Type;
+                            tdb.Portfolio = folio.PortfolioID;
+                            context.Transaction.Add(tdb);
+                        }
+                    }
+                }
+            }
+            Preferences.Update("LastUpdateDate", DateTime.Now.Date.ToString());
+            context.SaveChanges();
+            return true;
         }
     }
     public class IEarn

@@ -77,6 +77,13 @@ namespace Portfolio.Models.Portfolio
             List<HistoricalData> hdlist = GetData(ticker, Preferences.GetDate("StartDate"),DateTime.Now);
             return hdlist;
         }
+        public static List<HistoricalData> RetrieveByDate(DateTime StartDate)
+        {
+            var Context = new PortfolioContext();
+
+            return  Context.HistoricalData.Where(p => p.Date == StartDate).ToList();
+
+        }
         private static List<HistoricalData> GetData(string ticker, DateTime startDate, DateTime endDate)
         {
             List<HistoricalData> retval = new List<HistoricalData>();

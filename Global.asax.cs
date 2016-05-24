@@ -1,4 +1,5 @@
-﻿using Portfolio.Models.Portfolio;
+﻿using Portfolio.Models;
+using Portfolio.Models.Portfolio;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -26,6 +27,7 @@ namespace Portfolio
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
             PortfolioHistories ph = new PortfolioHistories();
+            Util.UpdateDBTransactions();
             ph.UpdateHistory();
 //            var Context = new PortfolioContext();
 //            Context.EmptyHistoricalData();

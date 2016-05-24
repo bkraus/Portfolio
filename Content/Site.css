@@ -137,7 +137,16 @@ table.Weather td  {
 }
 .edtRetire label{
     display:inline-block;
-}/* main layout
+
+}
+
+#Overview {
+    width: 500px;
+}
+#Detail {
+    width: 500px;
+}
+/* main layout
 ----------------------------------------------------------*/
 .content-wrapper {
     margin: 0 auto;

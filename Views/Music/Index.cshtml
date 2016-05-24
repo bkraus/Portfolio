@@ -1,0 +1,79 @@
+﻿@model Portfolio.Models.Music.MediaFile
+
+@{
+    ViewBag.Title = "Music Library";
+}
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+
+<h2>Music Library</h2>
+<div>
+    Song Count: @Model.TotalSongs
+</div><div>    Filtered Count: @Model.FilteredSongs
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#MusicTable').dataTable();
+    });
+
+
+ </script>
+
+<div>
+    @{List<SelectListItem> listItems = new List<SelectListItem>();}
+      
+   @foreach (var item in @Model.Artists)
+   {
+       listItems.Add(new SelectListItem
+       {
+           Text = item.Name,
+           Value = item.Name
+       });
+   }
+@using (Html.BeginForm("Filter", "Music"))
+{
+   @Html.TextBoxFor(m => m.ArtistFilter);
+    <input id="Search" type="submit" class="b" value="Filter" />
+}
+    <table id ="MusicTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Custom1</th>
+                <th>Custom2</th>
+                <th>Title2</th>
+                <th>Artist2</th>
+            </tr>
+        </thead>
+        @foreach (var song in Model.Songs)
+        {
+            <tr>
+                <td>
+                   @Html.DisplayFor(modelItem => song.Title)
+                </td>
+                <td>
+                   @Html.DisplayFor(modelItem => song.Artist)
+                </td>
+                <td>
+                   @Html.DisplayFor(modelItem => song.Custom1)
+                </td>
+                <td>
+                   @Html.DisplayFor(modelItem => song.Custom2)
+                </td>
+                <td>
+                   @Html.DisplayFor(modelItem => song.TagFile.Tag.Title)
+                </td>
+                <td>
+                   @Html.DisplayFor(modelItem => song.TagFile.Tag.FirstAlbumArtist)
+                </td>
+                <td>
+                @Html.ActionLink("EDIT", "Update", new { id = @song.ID, filter = @ViewBag.Filter })
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+
+

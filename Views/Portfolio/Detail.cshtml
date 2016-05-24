@@ -15,8 +15,10 @@
 </script>
 
 @foreach(var item in Model){
+    if (@item.PortfolioType <3)
+    {
     <h2>@item.Name</h2>
-<table id="Detail">
+<table id="Detail" class="table  table-striped table-bordered table-condensed">
     <tr>
         <th>Symbol
         </th>
@@ -46,7 +48,7 @@
         </th>
         <th>yrSP
         </th>
-        <th></th>
+
     </tr>
 @foreach (var Owned in item.portfolioData.Stocks) {
     <tr>
@@ -81,8 +83,8 @@
      </tr>
   }
 </table>
+    }
 }
-
 
 
 

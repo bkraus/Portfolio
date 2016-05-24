@@ -74,7 +74,6 @@ namespace Portfolio.Models
             }
         }
 
-
     }
 
 
@@ -92,6 +91,7 @@ namespace Portfolio.Models
         public bool IsMyAjustment { get; set; }
         public String Type { get; set; }
         public int TradeID { get; set; }
+        public bool Updated { get; set; }
     }
 
 

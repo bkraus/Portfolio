@@ -32,7 +32,7 @@ namespace Portfolio.Models.Portfolio
         [Display(Name = "Raymond James")]
         public decimal OtherIncome2 { get; set; }
         public decimal OtherIncome { get; set; }
-
+        public decimal MonthlyBenefits { get { return Reed + SSABenefit; } }
         public void LoadData(List<PortfolioFunds> portfolioFunds)
         {
             retireData = new List<RetireData>();
@@ -127,13 +127,12 @@ namespace Portfolio.Models.Portfolio
             Totrow.FutureValue = string.Format("{0:C}", ftotal); ;
             retireData.Add(Totrow);
 
-            decimal benefits = SSABenefit + Reed;
-            benefits = benefits * RetiredMonths;
+            decimal benefits = MonthlyBenefits * RetiredMonths;
             benefits = (benefits + (decimal)total) / AllMonths;
             CurrentMonthlySalary = benefits;
 
             double retmonth = wsf.Pmt((double)Interest / 12, (double)RetiredMonths, -ftotal);
-            FutureMonthlySalary = (decimal)retmonth + SSABenefit;
+            FutureMonthlySalary = (decimal)retmonth + MonthlyBenefits;
             MonthlySalary = RealMonthlySalary((decimal)total);
             CurrentValue = (decimal)total;
             Preferences.Update("MonthlyEstimate", MonthlySalary);
@@ -175,7 +174,7 @@ namespace Portfolio.Models.Portfolio
             for (int ii = 0; ii < Retiredmonths; ii++)
             {
                 decimal ipmt = total * (Interest / 12);
-                total = total + ipmt - (payment -SSABenefit);
+                total = total + ipmt - (payment - MonthlyBenefits);
             }
             return total;
         }

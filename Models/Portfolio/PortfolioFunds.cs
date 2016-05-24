@@ -27,6 +27,8 @@ namespace Portfolio.Models.Portfolio
         public PortfolioData portfolioData { get; set; }
         public decimal SPValue { get; set; }
         public decimal vsSP { get; set; }
+        public TimeSpan Split1 { get; set; }
+        public TimeSpan Split2 { get; set; }
         public int CompareTo(PortfolioFunds port)
         {
             if (this.displayorder < port.displayorder)
@@ -40,6 +42,7 @@ namespace Portfolio.Models.Portfolio
 
         public List<PortfolioFunds> Retrieve()
         {
+            DateTime start = DateTime.Now;
             List<PortFolios> portfolio = PortFolios.Retrieve();
             List<PortfolioInvestments> Investments = new List<PortfolioInvestments>();
             foreach (PortFolios folio in portfolio)
@@ -63,14 +66,18 @@ namespace Portfolio.Models.Portfolio
 
             List<PortfolioFunds> pslist = new List<PortfolioFunds>();
             DateTime SPYDate = Preferences.GetDate("SPYDate");
+            Split1 = DateTime.Now.Subtract(start);
+            List<HistoricalData> historicalData = HistoricalData.RetrieveAll("^GSPC");
+            historicalData.AddRange(HistoricalData.RetrieveByDate(SPYDate));
             foreach (PortFolios pf in portfolio)
             {
+
                 PortfolioFunds ps = new PortfolioFunds();
-               portfolioData = new PortfolioData();
+                portfolioData = new PortfolioData(historicalData);
                 PortfolioInvestments piRec = Investments.First(p => p.PortfolioID == pf.PortfolioID);
                 //    IfolioHistory h = cd.fhistory.FirstOrDefault(t => t.date == cd.pref.SPYDate);
                 //    cd.pref.yrValue.Add(h.Port[ii].Value - tr[ii].ps.GetSeedCashOnDate(cd.pref.SPYDate) + tr[ii].ps.SeedCash);
-                portfolioData.load(quotes,piRec,!pf.Name.Equals("Sold"),Preferences.GetDate("SPYDate"));
+                portfolioData.load(quotes, piRec, !pf.Name.Equals("Sold"), SPYDate);
                 ps.portfolioData = portfolioData;
                 ps.StartDate = piRec.StartDate;
                 ps.Name = pf.Name;
@@ -91,6 +98,7 @@ namespace Portfolio.Models.Portfolio
                 pslist.Add(ps);
             }
             pslist.Sort();
+            Split2 = DateTime.Now.Subtract(start);
 
             return pslist;
         }

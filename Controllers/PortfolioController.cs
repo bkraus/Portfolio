@@ -66,6 +66,7 @@ namespace Portfolio.Controllers
             Preferences.Update("FutureSavings", retirement.FutureSavings);
             Preferences.Update("BankInterest", retirement.BankInterest);
             Preferences.Update("Interest", retirement.Interest);
+            
             PortfolioFunds portfolioSummary = new PortfolioFunds();
             List<PortfolioFunds> portfolioFunds = portfolioSummary.Retrieve();
             Retirement ret = new Retirement();
@@ -112,44 +113,18 @@ namespace Portfolio.Controllers
             Summary.DiffCashValue = Summary.CashValue - Summary.SPCashValue;
             Summary.TodayDifference = Summary.MainFundChange - Summary.IndicesFundChange;
             Summary.FundDifference = fundDif;
+            if (DateTime.Now.TimeOfDay < new TimeSpan(9, 30, 0))
+            {
+                List<Quotes> SPQuotes = Quotes.GetPrices("ESM16.CME");
+                List<Quotes> NQQuotes = Quotes.GetPrices("NQM16.CME");
+                Summary.SPFutures = Util.RoundDecimal((SPQuotes[0].Last - SPQuotes[0].Open) * 100 / SPQuotes[0].Open,2);
+                Summary.NQFutures = Util.RoundDecimal((NQQuotes[0].Last - NQQuotes[0].Open) * 100 / NQQuotes[0].Open,2);
+            }
             return Summary;
         }
         private void UpdateData()
         {
-            var context = new PortfolioContext();
-            DateTime lastUpdate = Preferences.GetDate("LastUpdateDate");
-            List<PortFolios> portfolios = context.PortFolios.ToList();
-            foreach (PortFolios folio in portfolios)
-            {
-                Transactions transactions = new Transactions(folio.Name);
-                transactions.LoadData();
-                if (transactions.Records != null && transactions.Records.Count > 0)
-                {
-                    foreach (TransRec rec in transactions.Records)
-                    {
-                        if (rec.Date > lastUpdate)
-                        {
-                            TransactionDB tdb = new TransactionDB();
-                            tdb.Amount = rec.amount;
-                            tdb.Commission = rec.Commission;
-                            tdb.Date = rec.Date;
-                            tdb.Desc = rec.Desc;
-                            tdb.IsMyAdjustment = rec.IsMyAjustment;
-                            tdb.MyAdjustment = rec.MyAdjustment;
-                            tdb.Price = rec.Price;
-                            tdb.Qty = rec.Qty;
-                            tdb.Symbol = rec.Symbol;
-                            tdb.TradeID = rec.TradeID.ToString();
-                            tdb.TranId = rec.TranId.ToString();
-                            tdb.Type = rec.Type;
-                            tdb.Portfolio = folio.PortfolioID;
-                            context.Transaction.Add(tdb);
-                        }
-                    }
-                }
-            }
-            Preferences.Update("LastUpdateDate", DateTime.Now.Date.ToString());
-            context.SaveChanges();
+            Util.UpdateDBTransactions();
         }
 
         private void ConvertData()
@@ -229,6 +204,7 @@ namespace Portfolio.Controllers
             context.Options.Add(GetPref("Reed", pref.Reed.ToString(), "Reed", "Retirement"));
             context.Options.Add(GetPref("LastUpdateDate", DateTime.Now.ToString(), "LastUpdateDate", "Portfolio"));
             context.Options.Add(GetPref("MonthlyEstimate", pref.MonthlyEstimate.ToString(), "MonthlyEstimate", "Retirement"));
+            context.Options.Add(GetPref("MusicPath", "c:\\MusicBackup\\wmpMetadata.xml","MusicPath","Music"));
 
 
 

@@ -170,6 +170,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MusicController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\TransactionDBController.cs" />
     <Compile Include="Controllers\WeatherController.cs" />
@@ -179,7 +180,10 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Music\GroupList.cs" />
+    <Compile Include="Models\Music\MediaEdit.cs" />
     <Compile Include="Models\Music\MediaFile.cs" />
+    <Compile Include="Models\Music\SimpleFile.cs" />
+    <Compile Include="Models\Music\SongInfo.cs" />
     <Compile Include="Models\Portfolio\HistoricalData.cs" />
     <Compile Include="Models\Portfolio\PortfolioContext.cs" />
     <Compile Include="Models\Portfolio\PortfolioHistories.cs" />
@@ -344,6 +348,8 @@
     <Content Include="Views\Weather\Index.cshtml" />
     <Content Include="Views\Portfolio\Retirement.cshtml" />
     <Content Include="Views\Home\PortMain.cshtml" />
+    <Content Include="Views\Music\Index.cshtml" />
+    <Content Include="Views\Music\Update.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

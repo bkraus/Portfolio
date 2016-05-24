@@ -23,5 +23,7 @@ namespace Portfolio.Models.Portfolio
         public decimal StocksAbove { get; set; }
         public decimal StocksBelow { get; set; }
         public DateTime LastUpdate { get; set; }
+        public decimal? SPFutures { get; set; }
+        public decimal? NQFutures { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace Portfolio.Models.Portfolio
         public int stocksabove = 0;
         public int stocksbelow = 0;
         private DateTime eDate;
+        private List<HistoricalData> historicalData = null;
         public decimal DayPct
         {
             get
@@ -26,7 +27,10 @@ namespace Portfolio.Models.Portfolio
                 return Util.GetPct((DaysChange / (MarketValue - DaysChange)));
             }
         }
-
+        public PortfolioData(List<HistoricalData> histData)
+        {
+            historicalData = histData;
+        }
         public List<PortfolioStocks> load(List<Quotes> prices, PortfolioInvestments tr, bool isOwned, DateTime spDate)
         {
             eDate = DateTime.Today;
@@ -80,8 +84,8 @@ namespace Portfolio.Models.Portfolio
             Quotes pr = prices.FirstOrDefault(m => m.Symbol == "^GSPC");
             foreach (PortfolioStocks p in portfolio)
             {
-                p.AgainstSP = GetAgainstSP(p, pr.Last);
-                p.SPYPct = getSPYPct(p, spDate, pr.Last);
+                p.AgainstSP =  GetAgainstSP(p, pr.Last);
+                p.SPYPct =  getSPYPct(p, spDate, pr.Last);
 
                 if (p.DaysChangePct == lowerpct)
                 {
@@ -95,8 +99,8 @@ namespace Portfolio.Models.Portfolio
         }
         private decimal getSPYPct(PortfolioStocks p, DateTime spDate, decimal splast)
         {
-            HistoricalData h = HistoricalData.RetrieveOne("^GSPC",spDate);
-            HistoricalData s = HistoricalData.RetrieveOne(p.Symbol, spDate);
+            HistoricalData h = historicalData.Where(x => x.Symbol == "^GSPC" && x.Date == spDate).FirstOrDefault();
+            HistoricalData s = historicalData.Where(x => x.Symbol == p.Symbol && x.Date == spDate).FirstOrDefault();
             if (h == null || s == null || h.Open == 0 || s.Open == 0)
                 return 0;
             decimal spy = (splast - (decimal)h.Close) / (decimal)h.Close;
@@ -106,12 +110,12 @@ namespace Portfolio.Models.Portfolio
 
         }
 
-        public static decimal GetAgainstSP(PortfolioStocks p, decimal spLast)
+        public decimal GetAgainstSP(PortfolioStocks p, decimal spLast)
         {
             if (p.Cost == 0)
                 return 0;
 
-            HistoricalData h = HistoricalData.RetrieveOne("^GSPC", p.BuyDate);
+            HistoricalData h = historicalData.Where(x=> x.Symbol == "^GSPC" && x.Date == p.BuyDate).FirstOrDefault();
             if (h == null || h.Open == 0 || p.Cost == 0)
                 return 0;
             decimal spy = (spLast - (decimal)h.Open) / (decimal)h.Open;

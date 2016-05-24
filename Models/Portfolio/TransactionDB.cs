@@ -24,7 +24,6 @@ namespace Portfolio.Models.Portfolio
         public decimal MyAdjustment { get; set; }
         public bool IsMyAdjustment { get; set; }
         public String Type { get; set; }
-
         public static List<TransactionDB> PortfolioTransactions(int PortID)
         {
             var context = new PortfolioContext();

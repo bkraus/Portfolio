@@ -10,29 +10,35 @@ namespace Portfolio.Models.Music
 
     public class MediaFile
     {
-        public string Path { get; set; }
-        public string Title { get; set; }
-        public string Artist { get; set; }
-        public String Custom1 { get; set; }
-        public int Custom2 { get; set; }
-        public int sort { get; set; }
-        List<MediaFile> Songs { get; set; }
-        List<GroupList> Artists { get; set; }
-        List<GroupList> Playlists { get; set; }
+        public List<SongInfo> Songs { get; set; }
+        public List<GroupList> Artists { get; set; }
+        public List<GroupList> Playlists { get; set; }
         public int SongsInLists { get; set; }
         public int RankedSongs { get; set; }
         public int FilteredSongs { get; set; }
         public int TotalSongs { get; set; }
         public int SongsAbove { get; set; }
-
+        public string ArtistFilter { get; set; }
         public MediaFile()
         {
-            Songs = new List<MediaFile>();
+            Songs = new List<SongInfo>();
+            Artists = new List<GroupList>();
+            Playlists = new List<GroupList>();
+            ArtistFilter = "";
             LoadData();
         }
-        private void LoadData(bool Update = false)
+        public MediaFile(string Filter)
         {
-            XDocument xdoc = XDocument.Load(Preferences.Retrieve("MusicPath"));
+            Songs = new List<SongInfo>();
+            Artists = new List<GroupList>();
+            Playlists = new List<GroupList>();
+            ArtistFilter = Filter == null ? "" : Filter;
+
+            LoadData();
+        }
+        private void LoadData()
+        {
+            XDocument xdoc = XDocument.Load(Preferences.Retrieve("MusicPath") + "wmpMetadata.xml");
             List<XElement> Mediaitems = xdoc.Root.Elements("MediaItem").ToList();
             SongsInLists = 0;
             TotalSongs = Mediaitems.Count();
@@ -40,20 +46,22 @@ namespace Portfolio.Models.Music
             FilteredSongs = 0;
             SongsAbove = 0;
             int rank;
+            int id = 0;
             Songs.Clear();
+            List<SongInfo> lSongs = new List<SongInfo>();
             foreach (XElement Media in Mediaitems)
             {
-                MediaFile song = new MediaFile();
+                SongInfo song = new SongInfo();
                 song.Path = Media.Attribute("SourceUrl").Value;
                 song.Title = Media.Element("Title").Value;
                 song.Artist = !string.IsNullOrEmpty(Media.Element("WM_AlbumArtist").Value) ? Media.Element("WM_AlbumArtist").Value : Media.Element("Author").Value;
                 song.Custom1 = Media.Element("UserCustom1").Value;
+                song.ID = id++;
+                song.TagFile = TagLib.File.Create(song.Path);
                 int.TryParse((string)Media.Element("UserCustom2").Value, out rank);
                 song.Custom2 = rank;
                 if (rank > 40)
                     SongsAbove++;
-                Songs.Add(song);
-                FilteredSongs++;
 
                 if (song.Custom2 > 0)
                     RankedSongs++;
@@ -64,8 +72,15 @@ namespace Portfolio.Models.Music
                 }
                 AddtoArtist(song.Artist);
 
+                if (ArtistFilter == "" || song.Title.ToLower().Contains(ArtistFilter.ToLower()) 
+                    || song.Artist.ToLower().Contains(ArtistFilter.ToLower())
+                    || song.Custom2.ToString().Contains(ArtistFilter.ToLower()))
+                {
+                    lSongs.Add(song);
+                    FilteredSongs++;
+                }
             }
-
+            Songs = lSongs.OrderByDescending(x => x.Custom2).ToList();
 
         }
         private void AddtoArtist(string name)
@@ -102,6 +117,16 @@ namespace Portfolio.Models.Music
                 }
 
             }
+        }
+        public void SaveSong(SongInfo song)
+        {
+            XDocument xdoc = XDocument.Load(Preferences.Retrieve("MusicPath") + "wmpMetadata.xml");
+            List<XElement> Mediaitems = xdoc.Root.Elements("MediaItem").ToList();
+            XElement item = Mediaitems.Where(x => x.Attribute("SourceUrl").Value.ToString() == song.Path).FirstOrDefault();
+            if (song.Custom1 !=null)
+                item.Element("UserCustom1").Value = song.Custom1;
+            item.Element("UserCustom2").Value = song.Custom2.ToString();
+            xdoc.Save(Preferences.Retrieve("MusicPath") + "wmpMetadata.xml");
         }
     }
 

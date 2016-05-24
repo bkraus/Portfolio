@@ -32,8 +32,6 @@ namespace Portfolio.Models.Portfolio
 
         public PortfolioInvestments()
         {
-            decimal SeedCash = 0;
-            decimal Cash = 0;
             Deposits = new List<CashDeposits>();
             CashRec = new List<TransactionDB>();
             Owned = new List<StocksOwned>();
